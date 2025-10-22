@@ -7,7 +7,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -108,7 +107,7 @@ fun CardContent(name: String) {
             .padding(12.dp)
             .animateContentSize(
                 animationSpec = spring(
-                    Spring.DampingRatioMediumBouncy,
+                    dampingRatio = Spring.DampingRatioMediumBouncy,
                     stiffness = Spring.StiffnessLow,
                 )
             )
@@ -120,15 +119,16 @@ fun CardContent(name: String) {
         ) {
             Text(text = "Hello, ")
             Text(text = name, style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.ExtraBold))
-        }
-        if (expanded) {
-            Text(
-                text = ("Composem ipsum color sit lazy, " + "padding theme elit, sed do bouncy. ").repeat(4),
-            )
+            if (expanded) {
+                Text(
+                    text = ("Composem ipsum color sit lazy, " + "padding theme elit, sed do bouncy. ").repeat(4),
+                )
+            }
         }
         IconButton(onClick = { expanded = !expanded }) {
             Icon(
-                imageVector = if (expanded) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore, contentDescription = if (expanded) stringResource(R.string.show_less) else stringResource(R.string.show_more)
+                imageVector = if (expanded) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
+                contentDescription = if (expanded) stringResource(R.string.show_less) else stringResource(R.string.show_more)
             )
         }
     }
